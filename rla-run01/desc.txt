@@ -1,0 +1,2 @@
+This directory will have the Python code and pseudocode for the first run from the right launch area.
+Prefix the pseudo code with the word pseudo. 
