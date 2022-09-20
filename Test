@@ -1,1 +1,4 @@
-
+print("hello world")
+print("THIS IS A TEST")
+x = int(input("How old are you?"))
+print(f"You are {x} years old!")
