@@ -1,0 +1,63 @@
+from spike import PrimeHub, LightMatrix, Button, StatusLight, ForceSensor, MotionSensor, Speaker, ColorSensor, App, DistanceSensor, Motor, MotorPair
+from spike.control import wait_for_seconds, wait_until, Timer
+from math import *
+import math
+from spike.operator import equal_to, less_than
+
+#################################################################
+#B is the left wheel/small motor, A is the right wheel/small one.
+#C is the left gear/large motor, E is the right gear/large motor
+#D is the color sensor, F is the distance sensor
+#################################################################
+
+#Initialize the hub and distance sensor
+hub = PrimeHub()
+distance_sensor = DistanceSensor('F')
+color_sensor_left = ColorSensor('D')
+#color_sensor_right = ColorSensor('F')
+
+
+#Robo raptors motor pair are connected to ports A and B from spike import PrimeHub, LightMatrix, Button, StatusLight, ForceSensor, MotionSensor, Speaker, ColorSensor, App, DistanceSensor, Motor, MotorPair
+motor_pair = MotorPair('B', 'A')
+#STARTING POSITION - R(0,2 - LEFT BACK CORNER ALIGNED)
+def move_cm(distance_in_cm):
+    motor_pair.move(distance_in_cm,'cm', 0, 20) 
+
+#Turn right or left at an angle
+#degrees - degrees you want to turn
+#turn_type - right = 1, left = 2
+def turn_angle(degrees, turn_type):
+    if degrees == 0:
+        return
+    if (turn_type <=0 or turn_type >=3):
+        return
+    wheeldis = 8
+    numturns = 360/degrees
+    if (turn_type == 1):
+        steering = 100
+    elif (turn_type == 2):
+        steering = -100
+    print(wheeldis)
+    print(steering)
+    print(numturns)
+    motor_pair.move(wheeldis * math.pi /numturns, 'cm', steering, speed=7)
+
+
+move_cm(18)
+move_cm(-5)
+turn_angle(45,2)
+
+move_cm(30)
+turn_angle(90,1)
+move_cm(14)
+wait_for_seconds(1)
+move_cm(-14)
+move_cm(14)
+wait_for_seconds(1)
+move_cm(-14)
+move_cm(14)
+wait_for_seconds(1)
+move_cm(-14)
+move_cm(14)
+wait_for_seconds(1)
+move_cm(-14)
